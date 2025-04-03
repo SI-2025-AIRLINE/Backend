@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SIAirSystem.Server.Controllers
+namespace SIAirline.Controllers
 {
     [ApiController]
     [Route("[controller]")]

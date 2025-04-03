@@ -1,4 +1,4 @@
-namespace SIAirSystem.Server
+namespace SIAirline
 {
     public class WeatherForecast
     {

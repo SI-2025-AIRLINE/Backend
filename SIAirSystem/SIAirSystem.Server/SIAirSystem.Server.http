@@ -1,6 +1,0 @@
-@SIAirSystem.Server_HostAddress = http://localhost:5160
-
-GET {{SIAirSystem.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
