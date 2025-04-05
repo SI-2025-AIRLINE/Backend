@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddControllers();
+Console.WriteLine("DB Connection: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 
 var app = builder.Build();
 

@@ -45,6 +45,11 @@ namespace SIAirline.Data
                 .WithMany(d => d.ArrivalFlights) // Each Destination can be the arrival for many Flights
                 .HasForeignKey(f => f.ArrivalDestinationId) // Foreign key in Flight
                 .OnDelete(DeleteBehavior.Cascade); // Cascade delete: if Destination is deleted, delete its ArrivalFlights
+
+            // Add dummy data for Destination model
+            DestinationDataSeeder.Seed(modelBuilder);
+            AircraftDataSeeder.Seed(modelBuilder);
+
         }
     }
 }

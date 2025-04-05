@@ -11,6 +11,10 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Required]
         [MaxLength(255)]
         public string Model { get; set; }
+        
+        [Required]
+        [MaxLength(255)]
+        public string Description { get; set; }
 
         [Required]
         [MaxLength(255)]

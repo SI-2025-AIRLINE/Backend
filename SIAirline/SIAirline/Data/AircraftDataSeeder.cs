@@ -1,0 +1,213 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SIAirline.Data
+{
+    public static class AircraftDataSeeder
+    {
+        private static Random random = new Random();
+
+        private static string GenerateUniqueRegistrationNumber(HashSet<string> existingNumbers)
+        {
+            string newNumber;
+            do
+            {
+                newNumber = GenerateRegistrationNumber();
+            } while (existingNumbers.Contains(newNumber));
+
+            existingNumbers.Add(newNumber);
+            return newNumber;
+        }
+
+        private static string GenerateRegistrationNumber()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 5)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static void Seed(ModelBuilder modelBuilder)
+        {
+            HashSet<string> usedRegistrationNumbers = new HashSet<string>();
+
+            modelBuilder.Entity<Aircraft>().HasData(
+                new Aircraft { Id = 1, Model = "F100", Description = "Fokker 100", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 2, Model = "B461", Description = "BAe 146-100 Pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 3, Model = "B462", Description = "BAe 146-200 Pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 4, Model = "B463", Description = "BAe 146-300 Pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 5, Model = "E290", Description = "Embraer E190-E2", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 6, Model = "E295", Description = "Embraer E195-E2", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 7, Model = "BCS1", Description = "Airbus A220-100", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 8, Model = "BCS3", Description = "Airbus A220-200", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 9, Model = "A310", Description = "Airbus A310 all pax models", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 10, Model = "A318", Description = "Airbus A318", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 11, Model = "A319", Description = "Airbus A319 Ceo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 12, Model = "A19N", Description = "Airbus A319 Neo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 13, Model = "A320", Description = "Airbus A320-100/200 Ceo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 14, Model = "A321", Description = "Airbus A321-100/200 Ceo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 15, Model = "A21N", Description = "Airbus A321-200 Neo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 16, Model = "A332", Description = "Airbus A330-200", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 17, Model = "A333", Description = "Airbus A330-300", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 18, Model = "A340", Description = "Airbus A340 all models", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 19, Model = "A342", Description = "Airbus A340-200", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 20, Model = "A343", Description = "Airbus A340-300", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 21, Model = "A345", Description = "Airbus A340-500", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 22, Model = "A346", Description = "Airbus A340-600", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 23, Model = "A35K", Description = "Airbus A350-1000", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 24, Model = "A388", Description = "Airbus A380 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 25, Model = "B703", Description = "Boeing 707-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 26, Model = "B712", Description = "Boeing 717", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 27, Model = "B721", Description = "Boeing 727-100 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 28, Model = "B722", Description = "Boeing 727-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 29, Model = "B731", Description = "Boeing 737-100 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 30, Model = "B732", Description = "Boeing 737-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 31, Model = "B733", Description = "Boeing 737-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 32, Model = "B734", Description = "Boeing 737-400 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 33, Model = "B735", Description = "Boeing 737-500 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 34, Model = "B736", Description = "Boeing 737-600 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 35, Model = "B738", Description = "Boeing 737-800 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 36, Model = "B739", Description = "Boeing 737-900 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 37, Model = "B737", Description = "Boeing 737-700 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 38, Model = "B741", Description = "Boeing 747-100 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 39, Model = "B742", Description = "Boeing 747-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 40, Model = "B743", Description = "Boeing 747-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 41, Model = "B744", Description = "Boeing 747-400 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 42, Model = "B748", Description = "Boeing 747-8 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 43, Model = "N74S", Description = "Boeing 747SP", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 44, Model = "B74R", Description = "Boeing 747SR pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 45, Model = "B752", Description = "Boeing 757-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 46, Model = "B753", Description = "Boeing 757-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 47, Model = "B762", Description = "Boeing 767-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 48, Model = "B763", Description = "Boeing 767-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 49, Model = "B764", Description = "Boeing 767-400 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 50, Model = "B772", Description = "Boeing 777-200 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 51, Model = "B773", Description = "Boeing 777-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 52, Model = "B77W", Description = "Boeing 777-300ER pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 53, Model = "B78X", Description = "Boeing 787-10 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 54, Model = "B788", Description = "Boeing 787-8 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 55, Model = "B789", Description = "Boeing 787-9 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 56, Model = "B37M", Description = "Boeing 737 MAX 7 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 57, Model = "B38M", Description = "Boeing 737 MAX 8 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 58, Model = "B39M", Description = "Boeing 737 MAX 9 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 59, Model = "AN22", Description = "Antonov AN-22", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 60, Model = "AN26", Description = "Antonov AN-26", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 61, Model = "AN28", Description = "Antonov AN-28 / PZL Miele M-28 Skytruck", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 62, Model = "AN30", Description = "Antonov AN-30", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 63, Model = "AN32", Description = "Antonov AN-32", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 64, Model = "AN38", Description = "Antonov AN-38", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 65, Model = "A148", Description = "Antonov AN-148-100", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 66, Model = "A30B", Description = "Airbus Industrie A300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 67, Model = "A306", Description = "Airbus Industrie A300-600 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 68, Model = "A3ST", Description = "Airbus Industrie A300-600ST Beluga Freighter", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 69, Model = "AC68", Description = "Gulfstream/Rockwell (Aero) Commander", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 70, Model = "AC90", Description = "Gulfstream/Rockwell (Aero) Turbo Commander", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 71, Model = "AN24", Description = "Antonov AN-24", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 72, Model = "AN72", Description = "Antonov AN-72 / AN-74", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 73, Model = "AN12", Description = "Antonov AN-12", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 74, Model = "RJ1H", Description = "Avro RJ100 Avroliner", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 75, Model = "RJ70", Description = "Avro RJ70 Avroliner", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 76, Model = "RJ85", Description = "Avro RJ85 Avroliner", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 77, Model = "AT43", Description = "Aerospatiale/Alenia ATR 42-300 / 320", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 78, Model = "AT45", Description = "Aerospatiale/Alenia ATR 42-500", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 79, Model = "AT72", Description = "Aerospatiale/Alenia ATR 72", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 80, Model = "RX1H", Description = "Avro RJX100", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 81, Model = "RX85", Description = "Avro RJX85", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 82, Model = "BA11", Description = "British Aerospace (BAC) One Eleven / RomBAC One Eleven", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 83, Model = "B720", Description = "Boeing 720B pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 84, Model = "B190", Description = "Beechcraft 1900/1900C/1900D", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 85, Model = "BN2P", Description = "Pilatus Britten-Norman BN-2A/B Islander", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 86, Model = "TRIS", Description = "Pilatus Britten-Norman BN-2A Mk III Trislander", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 87, Model = "AJ27", Description = "COMAC ARJ21", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 88, Model = "CL60", Description = "Canadair Challenger", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 89, Model = "GLEX", Description = "Canadair Global Express", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 90, Model = "NOMA", Description = "Government Aircraft Factories N22B / N24A Nomad", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 91, Model = "CL44", Description = "Canadair CL-44", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 92, Model = "C750", Description = "Cessna 750 Citation X", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 93, Model = "CRJ1", Description = "Canadair Regional Jet 100", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 94, Model = "CRJ2", Description = "Canadair Regional Jet 200", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 95, Model = "CRJ7", Description = "Canadair Regional Jet 700", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 96, Model = "CRJ9", Description = "Canadair Regional Jet 900", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 97, Model = "CRJX", Description = "Canadair Regional Jet 1000", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 98, Model = "S210", Description = "Aerospatiale (Sud Aviation) Se.210 Caravelle", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 99, Model = "C212", Description = "CASA / IPTN 212 Aviocar", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 100, Model = "CN35", Description = "CASA / IPTN CN-235", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 101, Model = "CVLP", Description = "Convair CV-240 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 102, Model = "CVLT", Description = "Convair CV-580 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 103, Model = "DC10", Description = "Douglas DC-10 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 104, Model = "D228", Description = "Fairchild Dornier Do.228", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 105, Model = "D328", Description = "Fairchild Dornier Do.328", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 106, Model = "DC85", Description = "Douglas DC-8-50 Freighter", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 107, Model = "DC91", Description = "Douglas DC-9-10 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 108, Model = "DC3", Description = "Douglas DC-3 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 109, Model = "DC4", Description = "Douglas DC-4 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 110, Model = "DC6", Description = "Douglas DC6A/B pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 111, Model = "DH8A", Description = "De Havilland Canada DHC-8-100 Dash 8 / 8Q", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 112, Model = "DH8B", Description = "De Havilland Canada DHC-8-200 Dash 8 / 8Q", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 113, Model = "DH8C", Description = "De Havilland Canada DHC-8-300 Dash 8 / 8Q", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 114, Model = "DH8D", Description = "De Havilland Canada DHC-8-400 Dash 8Q", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 115, Model = "DHC7", Description = "De Havilland Canada DHC-7 Dash 7", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 116, Model = "DHC4", Description = "De Havilland Canada DHC-4 Caribou", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 117, Model = "DOVE", Description = "De Havilland DH.104 Dove", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 118, Model = "HERN", Description = "De Havilland DH.114 Heron", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 119, Model = "DHC3", Description = "De Havilland Canada DHC-3 Turbo Otter", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 120, Model = "DHC2", Description = "De Havilland Canada DHC-2 Beaver", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 121, Model = "DH2T", Description = "De Havilland Canada DHC-2 Turbo-Beaver", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 122, Model = "DHC6", Description = "De Havilland Canada DHC-6 Twin Otter", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 123, Model = "E170", Description = "Embraer 170", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 124, Model = "E190", Description = "Embraer 190", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 125, Model = "EC30", Description = "Eurocopter EC.130", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 126, Model = "E75S", Description = "Embraer 175 (Short wing)", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 127, Model = "E75L", Description = "Embraer 175 (Long Wing)", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 128, Model = "E195", Description = "Embraer 195", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 129, Model = "E120", Description = "Embraer EMB.120 Brasilia", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 130, Model = "E110", Description = "Embraer EMB.110 Bandeirnate", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 131, Model = "E135", Description = "Embraer RJ135", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 132, Model = "E35L", Description = "Embraer Legacy 600 / Legacy 650", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 133, Model = "E145", Description = "Embraer RJ145 Amazon", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 134, Model = "F28", Description = "Fokker F.28 Fellowship 1000", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 135, Model = "F27", Description = "Fokker F.27 Friendship / Fairchild F.27", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 136, Model = "F50", Description = "Fokker 50", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 137, Model = "F70", Description = "Fokker 70", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 138, Model = "FH227", Description = "Fairchild FH.227", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 139, Model = "J328", Description = "Fairchild Dornier 328JET", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 140, Model = "G73T", Description = "Grumman G.73 Turbo Mallard", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 141, Model = "G159", Description = "Gulfstream Aerospace G-159 Gulfstream I", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 142, Model = "COUC", Description = "Helio H-250 Courier / H-295 / 385 Super Courier", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 143, Model = "A748", Description = "Hawker Siddeley HS.748", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 144, Model = "I114", Description = "Ilyushin IL114", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 145, Model = "IL96", Description = "Ilyushin IL96-300 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 146, Model = "IL62", Description = "Ilyushin IL62", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 147, Model = "IL76", Description = "Ilyushin IL76", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 148, Model = "IL18", Description = "Ilyushin IL18", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 149, Model = "JS31", Description = "British Aerospace Jetstream 31", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 150, Model = "JS32", Description = "British Aerospace Jetstream 32", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 151, Model = "JS41", Description = "British Aerospace Jetstream 41", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 152, Model = "JU52", Description = "Junkers Ju52/3M", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 153, Model = "L101", Description = "Lockheed L-1011 Tristar pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 154, Model = "CONI", Description = "Lockheed L-1049 Super Constellation", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 155, Model = "L410", Description = "LET 410", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 156, Model = "L188", Description = "Lockheed L-188 Electra pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 157, Model = "C130", Description = "Lockheed L-182 / 282 / 382 (L-100) Hercules", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 158, Model = "MD11", Description = "McDonnell Douglas MD11 pax", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 159, Model = "MD80", Description = "McDonnell Douglas MD80", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 160, Model = "B105", Description = "Eurocopter (MBB) Bo.105", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 161, Model = "EXPL", Description = "MD Helicopters MD900 Explorer", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 162, Model = "MI8", Description = "MIL Mi-8 / Mi-17 / Mi-171 / Mil-172", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 163, Model = "MU2", Description = "Mitsubishi Mu-2", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 164, Model = "ND2", Description = "Aerospatiale (Nord) 262", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 165, Model = "NDC", Description = "Aerospatiale SN.601 Corvette", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 166, Model = "A20N", Description = "Airbus A320-200 Neo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 167, Model = "A330", Description = "Airbus A330 all models", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 168, Model = "A338", Description = "Airbus A330-800 Neo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 169, Model = "A339", Description = "Airbus A330-900 Neo", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 170, Model = "A359", Description = "Airbus A350-900", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 171, Model = "A140", Description = "Antonov AN-140", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 172, Model = "A124", Description = "Antonov AN-124 Ruslan", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) },
+                new Aircraft { Id = 173, Model = "A225", Description = "Antonov AN-225", RegistrationNumber = GenerateUniqueRegistrationNumber(usedRegistrationNumbers) }
+            );
+        }
+    }
+}
