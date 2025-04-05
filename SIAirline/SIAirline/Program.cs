@@ -30,12 +30,12 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // Enable Swagger middleware
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "SIAirline API v1");
+        options.SwaggerEndpoint("swagger/v1/swagger.json", "SIAirline API v1");
         options.RoutePrefix = string.Empty; // This makes Swagger available at the root URL
     });
 }
