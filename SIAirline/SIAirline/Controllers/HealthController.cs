@@ -14,14 +14,14 @@ namespace SIAirline.Controllers {
             _context = context;
         }
 
-        [HttpGet("api/health")]
+        [HttpGet]
         public IActionResult GetHealth() {
             // Check if the database is reachable
             try {
                 _context.Database.CanConnect();
                 return Ok(new {
                     status = "Healthy",
-                    message = "Database connection is healthy"
+                    message = "Database connection OK."
                 });
             }
             catch (Exception ex) {
